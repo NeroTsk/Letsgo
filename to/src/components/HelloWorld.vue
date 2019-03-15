@@ -1,36 +1,41 @@
 <template>
 
   
-  <div class="ToDo card-body">
+  <div class="card-body">
     <header>
-      <div class="ToDo card-header"> 
-        <img src="@/assets/lets.png" 
-          alt="the lets logo" 
-          class="image">        
-        <label>Welcome</label>
+      <div class="container"> 
+          <div>
+            <img src="@/assets/lets.png" 
+              alt="the lets logo" 
+              class="image">
+          </div>
+          <div> 
+            Welcome
+          </div>
       </div>
     </header>
     <div class="text-center">
-      <h1 class="title"> ToDo</h1>
-      <h3 class="title">{{ menssagem | capitalize }}</h3>
-        <div id="create">
+      
+        <div class="form" id="create">
+          <h1 class="title"> ToDo</h1>
+          <h3 class="title">{{ menssagem | capitalize }}</h3>
           <input 
             type="text" 
-            placeholder="write here what need should be done" 
+            placeholder="what you need done?" 
             id="textto" 
             class="cr-todo"
             v-model="text"
           >
-        </div>
-        <br>       
-        <button 
-          class="button"
-          id="crt"
-          onclick="confirmCriar"
-          @click="addTask"
-        >
-          Create Task
-        </button>
+          <br>
+          <br>
+          <button 
+            class="button"
+            id="crt"
+           onclick="confirmCriar"
+            @click="addTask"
+           >   Create Task
+           </button>
+        </div>       
 
         <ul 
           id="itens"
@@ -72,7 +77,7 @@
 export default {
   filters: {
     capitalize: function(value) {
-      return value.toUpperCase()    
+      return value 
     }
   },
 
@@ -86,6 +91,17 @@ export default {
     }
   },
 
+  mounted(){
+    this.$snotify.async('Called with promise', 'Success async', () => new Promise((resolve, reject) => {
+      setTimeout(() => resolve({
+        title: 'Success!!!',
+        body: 'We got an example success!',
+        config: {
+          closeOnClick: true
+        }
+      }), 2000);
+    }));
+  },
 
   methods: {
     
@@ -110,19 +126,20 @@ export default {
 </script>
 
 <style scoped>
-.card-header {
+
+
+.container {
+    display: grid;
+    grid-template-columns: 0.75fr 1fr;
+    font-size: 300%;    
+    color: rgba(52, 156, 175, 0.795);
     z-index: 20;
     right: 0;
     height: 3.6rem;
-    background-color: #fff;
+    fill-opacity: 0.4 ;
     box-sizing: border-box;
-    border-bottom: 1px solid #eaecef;
+    
 }
-*{
-
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-
 h1 {
   font-size: 60px; 
   color:rgba(52, 156, 175, 0.795);
@@ -131,14 +148,14 @@ h3 {
   font-size: 30px;
    color: rgba(52, 156, 175, 0.795);
 }
-label {
-  margin-left: 36%;
-  font-size: 40px;
-}
 .text-center{
-  
   text-align: center;
+
 }
+.form {
+
+}  
+
 .cr-todo {
   width: 350px;
   height: 60px;
